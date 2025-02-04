@@ -27,7 +27,9 @@ public:
         d.Parse(cStr);
         name = d["Title"].GetString();
         released = d["Released"].GetString();
-        type = (d["Type"].GetString() == "movie") ? 1 : 0;
+        type = d["Type"].GetString();
+        rating = d["imdbRating"].GetString();
+        genre = d["Genre"].GetString();
     }
 
     string getName()
@@ -40,7 +42,13 @@ public:
     }
     string getType()
     {
-        return ((type) ? "Movie" : "TVSeries");
+        return type;
+    }
+    string getRating() {
+        return rating;
+    }
+    string getGenre() {
+        return genre;
     }
     void setImdbId(string id)
     {
@@ -56,7 +64,9 @@ private:
 
     string name;
     string released;
-    bool type;
+    string type;
+    string rating;
+    string genre;
 };
 
 
@@ -97,9 +107,10 @@ public:
         for (int i = 0; i < list.size(); i++) {
             cout << "=====================\n";
             cout << "ID: " << list.at(i).getImdbId() << "\n";
-            cout << "Title: " << list.at(i).getName() << "\n";
+            cout << "Title: " << list.at(i).getName() << " ( " << list.at(i).getRating() << " )" << "\n";
             cout << "Released: " << list.at(i).getReleased() << "\n";
             cout << "Type: " << list.at(i).getType() << "\n";
+            cout << "Genre: " << list.at(i).getGenre() << "\n";
             cout << "=====================\n";
         }
     };
